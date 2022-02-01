@@ -1,11 +1,11 @@
 package com.example.vehicle.model;
 
-
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 // Repository Interface inherits JPA Repo
+@Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Integer>{    
-    List<Vehicle> findByMake(String make);
+    public Vehicle findByMake(String make);
+    public Vehicle findByModel(String model);
 }

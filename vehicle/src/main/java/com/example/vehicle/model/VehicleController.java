@@ -29,32 +29,32 @@ public class VehicleController {
     // create new Vehicle and save it to the database
     @PostMapping("/vehicles")
     public Vehicle createNewVehicles(
-        @RequestParam(value = "id", defaultValue = "0") String id, //allow unique id if empty
-        @RequestParam(value = "year") @Min(1950) @Max(2050) String year,
+        @RequestParam(defaultValue = "0") int id, //allow unique id if empty
+        @RequestParam @Min(1950) @Max(2050) int year,
         @RequestParam(value = "make") @NotBlank String make,
         @RequestParam(value = "model")@NotBlank String model
     ){
-        Vehicle newVehicle = new Vehicle(Integer.parseInt(id), Integer.parseInt(year), make, model);
+        Vehicle newVehicle = new Vehicle(id, year, make, model);
         return repository.save(newVehicle);
     }
 
     // replace or create vehicle
     @PutMapping("/vehicles")
     public Vehicle updateVehicle(
-        @RequestParam(value = "id") @NotBlank String id,
-        @RequestParam(value = "year")@Min(1950) @Max(2050) String year,
+        @RequestParam int id,
+        @RequestParam @Min(1950) @Max(2050) int year,
         @RequestParam(value = "make") @NotBlank String make,
         @RequestParam(value = "model") @NotBlank String model
     ){
         // find vehicle by Id
-        return repository.findById(Integer.parseInt(id)).map(vehicle ->{
-            vehicle.setYear(Integer.parseInt(year));
+        return repository.findById(id).map(vehicle ->{
+            vehicle.setYear(year);
             vehicle.setMake(make);
             vehicle.setModel(model);
             return repository.save(vehicle);
         }).orElseGet(()-> {
             // save a new vehicle
-            Vehicle newVehicle = new Vehicle(Integer.parseInt(id), Integer.parseInt(year), make, model);
+            Vehicle newVehicle = new Vehicle(id, year, make, model);
             return repository.save(newVehicle);
         });
     }
