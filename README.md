@@ -1,2 +1,0 @@
-# Enlyte,Mitchell Coding Challenge
- 
