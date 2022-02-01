@@ -7,7 +7,9 @@ What you will need
 - Open the directory in IDE test editor
 - Make sure you are using JDK 1.8 and Maven 3.2
 - Run the application
+
 Using Postman, provide query parameters using following resource and URI mapping:
+
 Resources and URI Mappings
 - Retrieve all Vehicles- GET /vehicles
 - Retrieve one Vehicles- GET /vehicles/{id}
